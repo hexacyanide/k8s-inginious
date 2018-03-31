@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nfs-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
+  # In many environments, a default StorageClass is set, with its own default
+  # provisioner. Unset this, or the PVC will create a new PV rather than bind.
+  storageClassName: ""
