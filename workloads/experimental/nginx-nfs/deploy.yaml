@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: exp-nginx-nfs-deploy
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: passthrough
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          volumeMounts:
+            - name: local-volume-name
+              mountPath: /mnt/path
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "10m"
+            # limits:
+            #   memory: "128Mi"
+            #   cpu: "500m"
+      # containers:
+      #   - image: ubuntu
+      #     volumeMounts:
+      #       - name: local-volume-name
+      #         mountPath: /mnt/path
+      volumes:
+        - name: local-volume-name
+          persistentVolumeClaim:
+            claimName: nfs-pvc
