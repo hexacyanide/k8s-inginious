@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-fe-proxy-deploy
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: passthrough
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+            - containerPort: 443
