@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mongo-deploy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: inginious-db
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:3.4
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongodb-data
+      volumes:
+        - name: mongodb-data
+          gcePersistentDisk:
+            pdName: inginious-dev-db-disk
+            fsType: ext4

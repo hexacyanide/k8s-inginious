@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-svc
+spec:
+  selector:
+    run: inginious-db
+  ports:
+    - name: mongo
+      protocol: TCP
+      port: 27017
