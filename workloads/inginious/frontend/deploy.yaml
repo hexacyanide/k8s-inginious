@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: inginious-fe-deploy
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: inginious-fe
+    spec:
+      containers:
+        - name: inginious
+          image: ucbcs/inginious-base:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: inginious-root-volume
+              mountPath: /inginious
+          # stdin: true
+          # tty: true
+      volumes:
+        - name: inginious-root-volume
+          persistentVolumeClaim:
+            claimName: nfs-pvc

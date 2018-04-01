@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: inginious-fe-svc
+spec:
+  selector:
+    run: inginious-fe
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080

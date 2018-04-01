@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: inginious-agent-mcq-deploy
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: inginious-agent-mcq
+    spec:
+      containers:
+        - name: inginious
+          image: ucbcs/inginious-agent-mcq
+          volumeMounts:
+            - name: inginious-root-volume
+              mountPath: /inginious
+          args: ["--tasks", "/inginious/tasks", "tcp://inginious-backend-svc:2001"]
+      volumes:
+        - name: inginious-root-volume
+          persistentVolumeClaim:
+            claimName: nfs-pvc

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: inginious-backend-svc
+spec:
+  selector:
+    run: inginious-backend
+  ports:
+    - name: inginious-agent
+      protocol: TCP
+      port: 2000
+    - name: inginious-client
+      protocol: TCP
+      port: 2001

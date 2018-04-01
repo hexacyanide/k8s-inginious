@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: inginious-backend-deploy
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: inginious-backend
+    spec:
+      containers:
+        - name: inginious
+          image: ucbcs/inginious-backend:latest
+          ports:
+            - containerPort: 2000
+            - containerPort: 2001
